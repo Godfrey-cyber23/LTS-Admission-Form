@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('backround1.jpg') no-repeat center center fixed;
+            background: url('_MG_3724.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #333;
         }
@@ -18,10 +18,14 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Optional border for clarity */
         }
+
 
         h1 {
             text-align: center;
@@ -34,12 +38,20 @@
         }
 
         input, select, textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333; /* Text color */
+    border: 1px solid #ccc; /* Border color */
+    padding: 10px;
+    border-radius: 4px;
+    width: calc(100% - 20px);
+}
+
+input:focus, select:focus, textarea:focus {
+    background-color: #e6f7ff; /* Slightly darker blue when focused */
+    border-color: #007BFF; /* Highlight border on focus */
+    outline: none; /* Remove default focus outline */
+}
+
 
         button {
             padding: 10px 15px;
@@ -56,8 +68,9 @@
 
         footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             font-style: italic;
+            font-size: small;
         }
 
         .tooltip {
@@ -97,10 +110,45 @@
             height: 150px;
             touch-action: none;
         }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 150px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px; /* Add spacing below the logo */
+        }
+
+        .contact-info {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.6;
+            color: black;
+        }
+
+        .contact-info a {
+            color: purple;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .school-motto {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 14px;
+            color: #555;
+        }
+
+
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="logo.png" alt="School Logo" class="logo">
+        
         <h1>Literecy Tree School - Admission Form</h1>
         <button onclick="toggleDarkMode()">Change Mode</button>
 
@@ -194,12 +242,24 @@
             <input type="hidden" id="signatureData" name="signatureData">
 
                 <button type="submit">Submit</button>
+                <p class="school-motto">"To teach is to touch a life forever."</p>
         </form>
     </div>
 
+    <div class="contact-info">
+        <p>
+            We are located in St. Bonaventure area,<br>
+            P. O. Box 39225, Makeni - Lusaka.<br>
+            Plot No. 401A/9B1.<br>
+            Tel: <a href="tel:+260211272439">+260 211 272 439</a>, 
+            Cell: <a href="tel:+260977845315">+260 977 845 315</a> / 
+            <a href="tel:+260966845315">+260 966 845 315</a>.
+        </p>
+    </div>
+
     <footer>
-        Design By Godfrey Bwalya, Contact: 0975755276,<br>
-        "Watch out for the New School app called LTS Plus"
+        Designed By Godfrey Bwalya<br>
+        "Watch out for the New School Mobile App called LTS Plus"
     </footer>
     <script>
         function calculateAge() {
