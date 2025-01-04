@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literecy Tree School Admission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('backround1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: #555;
+            color: blue;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 9;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: red;
+        }
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            height: 150px;
+            touch-action: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Literecy Tree School - Admission Form</h1>
+        <button onclick="toggleDarkMode()">Change Mode</button>
+
+        <form id="admissionForm" onsubmit="return validateForm()">
+            <label for="childFirstName">Child's First Name:</label>
+            <input type="text" id="childFirstName" name="childFirstName" placeholder="Child's First Name" required>
+
+            <label for="childSurname">Child's Surname:</label>
+            <input type="text" id="childSurname" name="childSurname" placeholder="Child's Last Name" required>
+
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" onchange="calculateAge()" required>
+
+            <label for="childAge">Child's Age:</label>
+            <input type="number" id="childAge" name="childAge" readonly>
+
+            <label for="placeOfBirth">Place of Birth:</label>
+            <input type="text" id="placeOfBirth" name="placeOfBirth" required>
+
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" required>
+
+            <label for="religion">Religion:</label>
+            <input type="text" id="religion" name="religion">
+
+            <label for="fathersName">Father's Name:</label>
+            <input type="text" id="fathersName" name="fathersName" required>
+
+            <label for="fathersContact">Father's Contact Number:</label>
+            <input type="tel" id="fathersContact" name="fathersContact" required>
+
+            <label for="mothersName">Mother's Name:</label>
+            <input type="text" id="mothersName" name="mothersName" required>
+
+            <label for="mothersContact">Mother's Contact Number:</label>
+            <input type="tel" id="mothersContact" name="mothersContact" required>
+
+            <label for="residentialAddress">Residential Address:</label>
+            <textarea id="residentialAddress" name="residentialAddress" required></textarea>
+
+            <label for="dateOfEntry">Date of Entry:</label>
+            <input type="date" id="dateOfEntry" name="dateOfEntry" onchange="validateDateOfEntry()" required>
+
+            <label for="allergies">Does the child have allergies?</label>
+            <select id="allergies" name="allergies" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+
+            <div id="allergyDetails" style="display: none;">
+                <label for="allergyDescription">If yes, specify:</label>
+                <textarea id="allergyDescription" name="allergyDescription"></textarea>
+            </div>
+
+            <label for="vaccination">Has the child been vaccinated against? Measles, Polio, Smallpox and others:</label>
+            <select id="vaccination" name="vaccination" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+
+            <div id="vaccinationDetails" style="display: none;">
+                <label for="vaccinationDescription">If yes, specify:</label>
+                <textarea id="vaccinationDescription" name="vaccinationDescription"></textarea>
+            </div>
+
+            <label for="doctorDetails">Doctor's details:</label>
+            <textarea id="doctorDetails" name="doctorDetails"></textarea>
+
+            <label for="doctorContact">Doctor's Contact Number:</label>
+            <input type="tel" id="doctorContact" name="doctorContact">
+
+            <label for="underFiveCard" id="underFiveCardLabel" style="display: none;">Upload Child's Under Five Card:</label>
+            <input type="file" id="underFiveCard" name="underFiveCard" accept="image/*" style="display: none;">
+
+            <label for="passportPhoto" id="passportPhotoLabel" style="display: none;">Upload a Passport Size Photo:</label>
+            <input type="file" id="passportPhoto" name="passportPhoto" accept="image/*" style="display: none;">
+
+            <label for="otherInfo">Any other information about the child:</label>
+            <textarea id="otherInfo" name="otherInfo"></textarea>
+
+            <label for="declaration">Declaration:</label>
+            <p>
+                I, 
+                <input type="text" id="declarationName" name="declarationName" placeholder="Enter your full name" required> 
+                hereby agree to pay all tuition fees in good time and that my child will comply with all school regulations.
+            </p>
+
+            <label for="signature">Parent's Signature:</label>
+            <canvas id="signatureCanvas"></canvas>
+            <button type="button" onclick="clearSignature()">Clear Signature</button>
+            <input type="hidden" id="signatureData" name="signatureData">
+
+                <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <footer>
+        Design By Godfrey Bwalya, Contact: 0975755276,<br>
+        "Watch out for the New School app called LTS Plus"
+    </footer>
+    <script>
+        function calculateAge() {
+    const dob = document.getElementById("dateOfBirth").value;
+    if (dob) {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById("childAge").value = age;
+
+        // Show or hide fields based on age
+        if (age < 5) {
+            document.getElementById("underFiveCardLabel").style.display = "block";
+            document.getElementById("underFiveCard").style.display = "block";
+            document.getElementById("passportPhotoLabel").style.display = "block";
+            document.getElementById("passportPhoto").style.display = "block";
+        } else {
+            document.getElementById("underFiveCardLabel").style.display = "none";
+            document.getElementById("underFiveCard").style.display = "none";
+            document.getElementById("passportPhotoLabel").style.display = "none";
+            document.getElementById("passportPhoto").style.display = "none";
+        }
+    }
+}
+
+
+        function validateDateOfEntry() {
+            const dateOfEntry = new Date(document.getElementById("dateOfEntry").value);
+            const today = new Date();
+            if (dateOfEntry < today) {
+                alert("Date of Entry cannot be in the past.");
+                document.getElementById("dateOfEntry").value = "";
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+   
+
+    
+        document.getElementById("allergies").addEventListener("change", function () {
+            const allergyDetails = document.getElementById("allergyDetails");
+            if (this.value === "Yes") {
+                allergyDetails.style.display = "block";
+                document.getElementById("allergyDescription").setAttribute("required", "required");
+            } else {
+                allergyDetails.style.display = "none";
+                document.getElementById("allergyDescription").removeAttribute("required");
+            }
+        });
+
+        document.getElementById("vaccination").addEventListener("change", function () {
+            const allergyDetails = document.getElementById("allergyDetails");
+            if (this.value === "Yes") {
+                vaccinationDetails.style.display = "block";
+                document.getElementById("vaccinationDescription").setAttribute("required", "required");
+            } else {
+                vaccinationDetails.style.display = "none";
+                document.getElementById("vaccinationDescription").removeAttribute("required");
+            }
+        });
+    
+        // Signature Pad Script
+        const canvas = document.getElementById("signatureCanvas");
+        const ctx = canvas.getContext("2d");
+        let drawing = false;
+        let lastX = 0, lastY = 0;
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        function startDrawing(e) {
+            drawing = true;
+            [lastX, lastY] = getCoordinates(e);
+        }
+
+        function stopDrawing() {
+            drawing = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+
+            const [x, y] = getCoordinates(e);
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "black";
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            [lastX, lastY] = [x, y];
+        }
+
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches) {
+                const touch = e.touches[0];
+                return [touch.clientX - rect.left, touch.clientY - rect.top];
+            } else {
+                return [e.clientX - rect.left, e.clientY - rect.top];
+            }
+        }
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById("signatureData").value = "";
+        }
+
+        document.getElementById("admissionForm").addEventListener("submit", function (e) {
+            // Save signature data as a base64 string
+            const signatureData = canvas.toDataURL("image/png");
+            document.getElementById("signatureData").value = signatureData;
+
+            if (!signatureData.includes("data:image/png;base64")) {
+                alert("Please provide your signature before submitting!");
+                e.preventDefault();
+            }
+        });
+
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("mouseout", stopDrawing);
+
+        canvas.addEventListener("touchstart", startDrawing, { passive: true });
+        canvas.addEventListener("touchmove", draw, { passive: true });
+        canvas.addEventListener("touchend", stopDrawing);
+    </script>
+</body>
+</html>
