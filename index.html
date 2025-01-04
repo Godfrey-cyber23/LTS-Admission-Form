@@ -38,13 +38,13 @@
         }
 
         input, select, textarea {
-    background-color: #f0f8ff; /* Light blue background */
-    color: #333; /* Text color */
-    border: 1px solid #ccc; /* Border color */
-    padding: 10px;
-    border-radius: 4px;
-    width: calc(100% - 20px);
-}
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333; /* Text color */
+            border: 1px solid #ccc; /* Border color */
+            padding: 10px;
+            border-radius: 4px;
+            width: calc(100% - 20px);
+        }
 
 input:focus, select:focus, textarea:focus {
     background-color: #e6f7ff; /* Slightly darker blue when focused */
@@ -317,7 +317,7 @@ input:focus, select:focus, textarea:focus {
         });
 
         document.getElementById("vaccination").addEventListener("change", function () {
-            const allergyDetails = document.getElementById("allergyDetails");
+            const vaccinationDetails = document.getElementById("vaccinationDetails");
             if (this.value === "Yes") {
                 vaccinationDetails.style.display = "block";
                 document.getElementById("vaccinationDescription").setAttribute("required", "required");
@@ -326,7 +326,7 @@ input:focus, select:focus, textarea:focus {
                 document.getElementById("vaccinationDescription").removeAttribute("required");
             }
         });
-    
+
         // Signature Pad Script
         const canvas = document.getElementById("signatureCanvas");
         const ctx = canvas.getContext("2d");
@@ -402,5 +402,31 @@ input:focus, select:focus, textarea:focus {
         canvas.addEventListener("touchmove", draw, { passive: true });
         canvas.addEventListener("touchend", stopDrawing);
     </script>
+         <!-- Add Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+        
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyC9_p1FA0kxbHpCAyvhukWq2ZqIPDh3Vis",
+        authDomain: "lts-admission-form.firebaseapp.com",
+        projectId: "lts-admission-form",
+        storageBucket: "lts-admission-form.firebasestorage.app",
+        messagingSenderId: "469201694810",
+        appId: "1:469201694810:web:e63ca99d9d806a64bba863",
+        measurementId: "G-GRZTENGJGT"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+ 
+ <script type="module" src="./form-handler.js"></script>
 </body>
 </html>
